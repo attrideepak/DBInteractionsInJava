@@ -1,7 +1,9 @@
 package core;
 
+import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 import org.testng.log4testng.Logger;
+import utils.db_utils.DBUtils;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -37,12 +39,16 @@ public class ConfigInitializer {
                         + activeEnv
                         + ".properties");
         logger.info("Properties loaded");
-        logger.debug("Properties loaded");
-        logger.warn("Properties loaded");
     }
 
     @BeforeSuite(alwaysRun = true)
     public void initialize() throws Exception {
         loadEnvProperties();
+    }
+
+    @AfterSuite(alwaysRun = true)
+    public void deInitAll() {
+        DBUtils.closeDbConnections();
+        logger.info("Suite tearDown Successful");
     }
 }

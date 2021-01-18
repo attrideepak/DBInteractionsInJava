@@ -6,9 +6,10 @@ import org.bson.conversions.Bson;
 import java.sql.SQLException;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 public interface IDBManager {
-    List<LinkedHashMap<String, String>> doSelect(
+    List<Map<String, String>> doSelect(
             DBType driver,
             String dbHost,
             int port,
